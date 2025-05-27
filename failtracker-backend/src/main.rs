@@ -11,7 +11,7 @@ use uuid::Uuid;
 use chrono::Utc;
 use tower_http::cors::{CorsLayer, Any};
 use std::sync::Arc;
-use rand::{seq::SliceRandom, prelude::IndexedRandom};
+use rand::{prelude::IndexedRandom};
 
 // use hyper::Server;
 
@@ -118,7 +118,9 @@ const ANIMAIS: [&str; 50] = [
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let pool = Arc::new(SqlitePool::connect("sqlite://./failtracker.db").await?);
+    //let pool = Arc::new(SqlitePool::connect("sqlite://./failtracker.db").await?);
+    // let pool = Arc::new(SqlitePool::connect("sqlite:///data/failtracker.db").await?);
+    let pool = Arc::new(SqlitePool::connect("sqlite:///data/failtracker.db").await?);
 
     // Cria tabela se não existir
     sqlx::query(

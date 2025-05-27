@@ -5,8 +5,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./failtracker-backend:/app
-      - ./failtracker-backend/failtracker.db:/app/failtracker.db
+      # - ./failtracker-backend:/app
+      # - ./failtracker-backend/failtracker.db:/app/failtracker.db
+      - ./failtracker-backend/data:/data   # monta só banco em /data
+      
     restart: unless-stopped
 
   frontend:
