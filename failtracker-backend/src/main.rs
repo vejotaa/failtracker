@@ -1,5 +1,5 @@
 use axum::{
-    routing::{get, post},
+    routing::{get},
     Router,
     Json,
     http::Method,
@@ -107,7 +107,7 @@ const ANIMAIS: [&str; 50] = [
   "Xerente", "Zebra", "Avestruz", "Bicho-preguiça", "Cobra",
   "Dromedário", "Enguia", "Flamingo", "Galo-da-serra", "Hipopótamo"
 ];
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     let adj = ADJETIVOS.choose(&mut rng).unwrap();
     let cor = CORES.choose(&mut rng).unwrap();
     let animal = ANIMAIS.choose(&mut rng).unwrap();
@@ -120,7 +120,7 @@ const ANIMAIS: [&str; 50] = [
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     //let pool = Arc::new(SqlitePool::connect("sqlite://./failtracker.db").await?);
     // let pool = Arc::new(SqlitePool::connect("sqlite:///data/failtracker.db").await?);
-    let pool = Arc::new(SqlitePool::connect("sqlite:///data/failtracker.db").await?);
+    let pool = Arc::new(SqlitePool::connect("sqlite://data/failtracker.db").await?);
 
     // Cria tabela se não existir
     sqlx::query(
