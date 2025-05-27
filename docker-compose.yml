@@ -7,7 +7,7 @@ services:
     volumes:
       # - ./failtracker-backend:/app
       # - ./failtracker-backend/failtracker.db:/app/failtracker.db
-      - ./failtracker-backend/data:/data   # monta só banco em /data      
+      - ./failtracker-backend/data:/app/data
     restart: unless-stopped
 
   frontend:
