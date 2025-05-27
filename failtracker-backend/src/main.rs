@@ -11,7 +11,7 @@ use uuid::Uuid;
 use chrono::Utc;
 use tower_http::cors::{CorsLayer, Any};
 use std::sync::Arc;
-use rand::{thread_rng, seq::SliceRandom, prelude::IndexedRandom};
+use rand::{seq::SliceRandom, prelude::IndexedRandom};
 
 // use hyper::Server;
 
@@ -69,7 +69,7 @@ async fn limpar_falhas(State(pool): State<Arc<SqlitePool>>) -> Result<&'static s
 }
 
 fn nome_aleatorio() -> String {
-const adjetivos: [&str; 50] = [
+const ADJETIVOS: [&str; 50] = [
   "Rápido", "Brilhante", "Sorridente", "Travesso", "Zumbido",
   "Furioso", "Gentil", "Espiritual", "Curioso", "Magnífico",
   "Valente", "Ágil", "Sábio", "Lento", "Radiante",
@@ -82,7 +82,7 @@ const adjetivos: [&str; 50] = [
   "Feliz", "Bravo", "Generoso", "Forte", "Luminoso"
 ];
 
-const cores: [&str; 50] = [
+const CORES: [&str; 50] = [
   "Vermelho", "Azul", "Verde", "Amarelo", "Roxo",
   "Laranja", "Ciano", "Magenta", "Marrom", "Cinza",
   "Rosa", "Turquesa", "Dourado", "Prateado", "Bege",
@@ -95,7 +95,7 @@ const cores: [&str; 50] = [
   "Rosa-bebê", "Verde-floresta", "Cinza-chumbo", "Lavanda-claro", "Cobre-escuro"
 ];
 
-const animais: [&str; 50] = [
+const ANIMAIS: [&str; 50] = [
   "Tigre", "Panda", "Canguru", "Coruja", "Foca",
   "Lobo", "Girafa", "Elefante", "Leão", "Urso",
   "Raposa", "Coala", "Cavalo", "Golfinho", "Arraia",
@@ -108,9 +108,9 @@ const animais: [&str; 50] = [
   "Dromedário", "Enguia", "Flamingo", "Galo-da-serra", "Hipopótamo"
 ];
     let mut rng = rand::thread_rng();
-    let adj = adjetivos.choose(&mut rng).unwrap();
-    let cor = cores.choose(&mut rng).unwrap();
-    let animal = animais.choose(&mut rng).unwrap();
+    let adj = ADJETIVOS.choose(&mut rng).unwrap();
+    let cor = CORES.choose(&mut rng).unwrap();
+    let animal = ANIMAIS.choose(&mut rng).unwrap();
 
     format!("{} {} {}", adj, cor, animal)
 }
@@ -141,13 +141,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with_state(pool.clone())
         .layer(cors);
 
-    println!("API rodando em 127.0.0.1:3000");
+    //println!("API rodando em 127.0.0.1:3000");
+    println!("API rodando em 0.0.0.0:3000");
     //hyper::Server::bind(&"127.0.0.1:3000".parse().unwrap())
     // // axum::Server::bind(&"127.0.0.1:3000".parse().unwrap())
     //     .serve(app.into_make_service())
     //     .await?;
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await?;
+    //let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await?;
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?; // listen on all interfaces
+
     axum::serve(listener, app).await?;
 
 

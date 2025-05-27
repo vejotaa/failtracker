@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: ./failtracker-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./failtracker-backend:/app
+      - ./failtracker-backend/failtracker.db:/app/failtracker.db
+
+  frontend:
+    build:
+      context: ./failtracker-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
