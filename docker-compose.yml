@@ -7,6 +7,7 @@ services:
     volumes:
       - ./failtracker-backend:/app
       - ./failtracker-backend/failtracker.db:/app/failtracker.db
+    restart: unless-stopped
 
   frontend:
     build:
@@ -15,3 +16,4 @@ services:
       - "5173:80"
     depends_on:
       - backend
+    restart: unless-stopped
