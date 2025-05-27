@@ -9,6 +9,8 @@
 
 **Failtracker** é uma aplicação web full stack para registrar, listar e apagar falhas relacionadas a hábitos pessoais. Toda vez que você "escorrega" em um hábito que deseja manter, pode registrar essa falha com apenas um clique — de forma rápida, leve e visual.
 
+![Preview da Interface](./docs/preview.png)
+
 ---
 
 ## 🧠 Visão Geral
@@ -34,7 +36,7 @@ O projeto é composto por dois serviços principais:
 
 ```bash
 sudo apt update
-sudo apt install -y docker.io docker-compose
+sudo apt install -y docker.io docker-compose git
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
@@ -42,7 +44,7 @@ sudo systemctl enable docker
 ##### Arch Linux
 
 ```bash
-sudo pacman -Syu docker docker-compose
+sudo pacman -Syu docker docker-compose git
 sudo systemctl start docker.service
 sudo systemctl enable docker.service
 ```
@@ -67,6 +69,13 @@ sudo systemctl enable docker.service
 
 > Obs: Docker Desktop requer Windows 10/11 Pro, Enterprise ou Education com Hyper-V habilitado.  
 > Para Windows Home, considere usar Docker Toolbox ou WSL 2.
+
+- Baixe e instale o [Git](https://git-scm.com/downloads)
+
+   Após a instalação, verifique:
+   ```bash
+   git --version
+   ```
 
 ---
 
@@ -189,8 +198,8 @@ npm run dev
 
 #### Acesse no navegador:
 
-🌐 Frontend: http://localhost:5173  
-🔌 Backend: http://localhost:3000
+- 🌐 Frontend: http://localhost:5173  
+- 🔌 Backend: http://localhost:3000
 
 ---
 
