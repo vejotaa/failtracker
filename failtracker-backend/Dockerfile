@@ -10,6 +10,9 @@ RUN cargo build --release && ls -l target/release/
 FROM debian:stable-20250520-slim
 
 WORKDIR /app
+
+RUN mkdir -p /data
+
 COPY --from=builder /app/target/release/failtracker-backend /usr/local/bin/
 
 EXPOSE 3000
